@@ -1,4 +1,6 @@
-import { querySelector } from "./misc.js";
+import "./style.css";
+
+import { querySelector } from "./misc";
 
 console.log("start");
 const svgns = "http://www.w3.org/2000/svg";
