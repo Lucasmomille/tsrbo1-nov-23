@@ -1,6 +1,6 @@
 svg {
-  width: 50em;
-  height: 25em;
+  width: 40em;
+  height: 20em;
   border: 0.1em solid black;
 }
 
@@ -8,4 +8,8 @@ circle {
   fill: transparent;
   stroke: black;
   stroke-width: 0.02em;
+}
+
+.samples circle {
+  fill: black;
 }
