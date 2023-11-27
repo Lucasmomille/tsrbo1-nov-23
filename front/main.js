@@ -6,11 +6,12 @@ const cy0 = 50;
 const r0 = 45;
 
 const samples = 10;
+const multiplicationFactor = 2;
 
 const r = 1;
 
 const getSamplePosition = (i, samples) => {
-  const angle = (i * 2 * Math.PI) / samples;
+  const angle = (i * 2 * Math.PI) / samples - Math.PI / 2;
 
   const x = cx0 + r0 * Math.cos(angle);
   const y = cy0 + r0 * Math.sin(angle);
@@ -30,4 +31,21 @@ for (let i = 0; i < samples; i++) {
   elt.setAttributeNS(null, "r", r);
 
   container.appendChild(elt);
+}
+
+const lineContainer = document.querySelector("svg .lines");
+console.log("lineContainer: ", lineContainer);
+for (let i = 0; i < samples; i++) {
+  const elt = document.createElementNS(svgns, "line");
+  console.log("elt: %O", elt);
+
+  const p1 = getSamplePosition(i, samples);
+  const p2 = getSamplePosition(i * multiplicationFactor, samples);
+
+  elt.setAttributeNS(null, "x1", p1.x);
+  elt.setAttributeNS(null, "x2", p2.x);
+  elt.setAttributeNS(null, "y1", p1.y);
+  elt.setAttributeNS(null, "y2", p2.y);
+
+  lineContainer.appendChild(elt);
 }
