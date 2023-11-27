@@ -1,12 +1,20 @@
 console.log("start");
 const svgns = "http://www.w3.org/2000/svg";
 
+const cx0 = 50;
+const cy0 = 50;
+const r0 = 45;
+
 const samples = 10;
 
 const r = 1;
 
 const getSamplePosition = (i, samples) => {
-  return { x: 12, y: 53 };
+  const angle = (i * 2 * Math.PI) / samples;
+
+  const x = cx0 + r0 * Math.cos(angle);
+  const y = cy0 + r0 * Math.sin(angle);
+  return { x, y };
 };
 
 const container = document.querySelector("svg .samples");
