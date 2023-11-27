@@ -1,0 +1,44 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+svg {
+  width: 40em;
+  height: 20em;
+  border: 0.1em solid black;
+}
+
+circle {
+  fill: transparent;
+  stroke: black;
+  stroke-width: 0.02em;
+}
+
+.samples circle {
+  fill: black;
+}
+
+.lines line {
+  stroke: black;
+  stroke-width: 0.02em;
+}
+
+div.command {
+  width: 40em;
+  height: 10em;
+  border: 0.1em solid black;
+  padding: 0.5em;
+
+  display: flex;
+  flex-flow: column;
+  gap: 1em;
+
+  label {
+    display: flex;
+    flex-flow: column;
+  }
+}
