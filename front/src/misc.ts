@@ -1,9 +1,17 @@
-export const querySelector = (cssSelector: string): Element => {
+type Class<T> = new () => T;
+
+export const querySelector = <T extends Element>(
+  cssSelector: string,
+  type?: Class<T>
+): T => {
   const container = document.querySelector(cssSelector);
   if (container === null) {
     throw new Error(`Cannot find element with selector ${cssSelector}`);
   }
-  return container;
+  if (type && !(container instanceof type)) {
+    throw new Error(`Element found is not of type ${type.name}`);
+  }
+  return container as T;
 };
 
 export const setNbrAttribute = (

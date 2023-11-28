@@ -8,15 +8,22 @@ export class Command {
     samples: 0,
     multiplicationFactor: 0,
   };
+  callback: Callback = () => {};
 
   onChange(callback: Callback): void {
-    throw new Error("Method not implemented.");
+    this.callback = callback;
   }
 
   render(): void {
     for (const key of keys(this.config)) {
       const elt = querySelector(`.command .${key} .value`);
       elt.innerHTML = this.config[key] + "";
+
+      const sliderElt = querySelector(
+        `.command .${key} .value`,
+        HTMLInputElement
+      );
+      sliderElt.value = this.config[key] + "";
     }
   }
 
