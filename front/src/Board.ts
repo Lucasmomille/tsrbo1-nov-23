@@ -12,11 +12,10 @@ export class Board {
   draw(): void {
     const { samples, multiplicationFactor } = this.config;
     const container = querySelector("svg .samples");
+    container.innerHTML = "";
 
-    console.log("container: ", container);
     for (let i = 0; i < samples; i++) {
       const elt = document.createElementNS(svgns, "circle");
-      console.log("elt: %O", elt);
 
       const { x: cx, y: cy } = getSamplePosition(i, samples);
 
@@ -28,11 +27,10 @@ export class Board {
     }
 
     const lineContainer = querySelector("svg .lines");
+    lineContainer.innerHTML = "";
 
-    console.log("lineContainer: ", lineContainer);
     for (let i = 0; i < samples; i++) {
       const elt = document.createElementNS(svgns, "line");
-      console.log("elt: %O", elt);
 
       const p1 = getSamplePosition(i, samples);
       const p2 = getSamplePosition(i * multiplicationFactor, samples);
