@@ -3,7 +3,7 @@ console.log("About to start a server...");
 import express from "express";
 import serveIndex from "serve-index";
 
-import api from "./api";
+import api from "./api.js";
 
 const port = 3000;
 const publicDir = ".";
