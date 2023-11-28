@@ -1,5 +1,7 @@
+import { api } from "./api";
+import { max, step } from "./constants";
 import { Config } from "./interfaces/Config";
-import { keys, querySelector } from "./misc";
+import { keys, querySelector, sleep } from "./misc";
 
 type Callback = (newConfig: Config) => void;
 
@@ -9,6 +11,7 @@ export class Command {
     samples: 0,
     multiplicationFactor: 0,
   };
+  isPlaying = false;
 
   constructor() {
     this.setActions();
@@ -29,6 +32,10 @@ export class Command {
       );
       sliderElt.value = this.config[key] + "";
     }
+
+    querySelector(".command .buttons .play").innerHTML = this.isPlaying
+      ? "Pause"
+      : "Play";
   }
 
   setActions(): void {
@@ -38,18 +45,51 @@ export class Command {
         HTMLInputElement
       );
       sliderElt.addEventListener("input", () => {
-        const config = {
+        const config: Config = {
           ...this.config,
-          [key]: sliderElt.value,
+          [key]: +sliderElt.value,
         };
         this.setConfig(config);
       });
     }
+    this.setBtnActions();
+  }
+
+  setBtnActions(): void {
+    const btnElt = querySelector(".command .buttons .play");
+    btnElt.addEventListener("click", () => {
+      this.isPlaying = !this.isPlaying;
+      if (this.isPlaying) {
+        this.startPlaying();
+      }
+      this.render();
+    });
+    const randomBtnElt = querySelector(".command .buttons .random");
+    randomBtnElt.addEventListener("click", () => {
+      (async (): Promise<void> => {
+        this.config = await api.getRandomConfig();
+        this.render();
+        this.callback(this.config);
+      })();
+    });
   }
 
   setConfig(config: Config): void {
     this.config = config;
     this.render();
     this.callback(this.config);
+  }
+
+  async startPlaying(): Promise<void> {
+    while (this.isPlaying) {
+      this.config.multiplicationFactor = +(
+        (this.config.multiplicationFactor + step) %
+        max
+      ).toFixed(2);
+
+      this.render();
+      this.callback(this.config);
+      await sleep(15);
+    }
   }
 }

@@ -25,3 +25,14 @@ export const setNbrAttribute = (
 export const keys = <T extends object>(obj: T): (keyof T)[] => {
   return Object.keys(obj) as (keyof T)[];
 };
+
+export type millisecond = number;
+
+/**
+ * Sleep for delay millisseconds
+ *
+ * @param {millisecond} delay
+ * @return {*}  {Promise<void>}
+ */
+export const sleep = (delay: millisecond): Promise<void> =>
+  new Promise((r) => setTimeout(r, delay));
