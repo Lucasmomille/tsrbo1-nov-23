@@ -9,7 +9,7 @@ export class Board {
     samples: 0,
   };
 
-  draw() {
+  draw(): void {
     const { samples, multiplicationFactor } = this.config;
     const container = querySelector("svg .samples");
 
@@ -46,7 +46,7 @@ export class Board {
     }
   }
 
-  setConfig(config: Config) {
+  setConfig(config: Config): void {
     this.config = config;
   }
 }

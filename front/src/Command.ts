@@ -9,18 +9,18 @@ export class Command {
     multiplicationFactor: 0,
   };
 
-  onChange(callback: Callback) {
+  onChange(callback: Callback): void {
     throw new Error("Method not implemented.");
   }
 
-  render() {
+  render(): void {
     for (const key of keys(this.config)) {
       const elt = querySelector(`.command .${key} .value`);
       elt.innerHTML = this.config[key] + "";
     }
   }
 
-  setConfig(config: Config) {
+  setConfig(config: Config): void {
     this.config = config;
     this.render();
   }
