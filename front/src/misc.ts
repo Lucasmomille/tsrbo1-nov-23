@@ -22,8 +22,10 @@ export const setNbrAttribute = (
   elt.setAttributeNS(null, key, value + "");
 };
 
+type Tableau<T> = T[];
+
 export const keys = <T extends object>(obj: T): (keyof T)[] => {
-  return Object.keys(obj) as (keyof T)[];
+  return Object.keys(obj) as Tableau<keyof T>;
 };
 
 export type millisecond = number;

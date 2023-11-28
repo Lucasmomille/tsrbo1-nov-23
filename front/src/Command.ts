@@ -74,8 +74,8 @@ export class Command {
     });
   }
 
-  setConfig(config: Config): void {
-    this.config = config;
+  setConfig(config: Partial<Config>): void {
+    this.config = { ...this.config, ...config };
     this.render();
     this.callback(this.config);
   }
